@@ -1,0 +1,16 @@
+{% extends "general/general_base.html" %}
+{% load static %}
+
+<div class="container">
+    {% block content %}
+    {% block pregeneral %}
+    {% endblock %}
+    {% block general_content %}
+    <div class="container">
+        <h1> {{ player.name }}</h1>
+
+
+    </div>
+    {% endblock %}
+    {% endblock %}
+</div>

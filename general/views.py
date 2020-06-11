@@ -11,3 +11,6 @@ class PlayersListView (generic.ListView):
 
 class TeamDetailView(generic.DetailView):
     model = Team
+
+class PlayerDetailView(generic.DetailView):
+    model = Player

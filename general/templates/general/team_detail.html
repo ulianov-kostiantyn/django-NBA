@@ -7,14 +7,17 @@
     {% endblock %}
     {% block general_content %}
     <div class="container">
-        <h1>Welcome {{team.city}} {{ team.name }} page!</h1>
+        <h1>Welcome to {{team.city}} {{ team.name }} page!</h1>
         <img src="{{ team.logo.url }}" width=200 heigh=200>
         <h2>Arena:</h2> <p>{{ team.arena }}</p>
         <h2>About: </h2> <p>{{ team.description }}</p>
         <h2>Players: </h2>
-        {% for team.team_related in  team.team_related.all %}
-            {{ team.team_related.name }}
-        {% endfor %}
+        <ul>
+            {% for player in  team.team_related.all %}
+                <li><a href="{% url 'general:detailplayer' slug=player.slug %}">{{ player.name }} {{ player.surname }}</a></li> 
+            {% endfor %}
+        </ul>
+
 
     </div>
     {% endblock %}

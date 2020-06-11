@@ -8,7 +8,7 @@ User = get_user_model()
 class Team(models.Model):
     ConferenceSide = models.TextChoices('ConferenceSide', 'WESTERN EASTERN')
     name = models.CharField(max_length=255,unique=True)
-    slug = models.SlugField(allow_unicode=True,unique=True)
+    slug = models.SlugField(max_length = 250, null = True, blank = True)
     city = models.CharField(max_length=255,unique=True)
     arena  = models.CharField(max_length=255,unique=True)
     description = models.TextField(blank=True,default='')
@@ -33,14 +33,18 @@ class Player(models.Model):
     team = models.ForeignKey(Team,related_name='team_related',on_delete=models.CASCADE)
     height = models.FloatField()
     age = models.IntegerField()
+    slug = models.SlugField(max_length = 250, null = True, blank = True)
     photo = models.ImageField(upload_to='media',default='')
 
     def __str__(self):
         return self.surname
 
     def save(self,*args,**kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(self.name + self.surname)
         super().save(*args,**kwargs)
+
+    def get_absolute_url(self):
+        return reverse('general:team',kwargs={'pk':self.pk})
 
     class Meta:
         ordering = ['surname']
