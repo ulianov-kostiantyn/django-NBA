@@ -1,0 +1,84 @@
+{% extends "general/general_base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% block pregeneral %}{% endblock %}
+        {% block general_content %}
+        <script type="text/javascript">
+            var e=0, w=0
+        </script>
+
+                <div class="col-xs-6">
+                    <div class="table-responsive">
+                        <table class="table table-striped" style="width:50%; float: left;">
+                            <thead>
+                                <th scope="col">Place</th>
+                                <!-- <th scope="col">Logo</th> -->
+                                <th scope="col">Team</th>
+                                <th scope="col">Wins</th>
+                                <th scope="col">Looses</th>
+
+                            </thead>
+                            {% for team in  object_list %}
+                                {% if team.conference == "WESTERN" %}
+                                <script type="text/javascript">
+                                    w=w+1
+                                </script>
+                            <tbody>
+                                <tr>
+                                    <td><script type="text/javascript">
+                                        document.write(w);
+                                    </script></td>
+                                    <!-- <td><img src="{{ team.logo.url }}" width=100 heigh=100></td> -->
+                                    <td><a href="{% url 'general:detailteam' slug=team.slug  %}">{{ team.name}}</a>  </td>
+                                    <td>{{ team.wins }}</td>
+                                    <td>{{ team.looses }}</td>
+                                </tr>
+                            </tbody>
+                                {% endif %}
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="table-responsive">
+                        <table class="table table-striped" style="width:50%; float: left;">
+                            <thead>
+                                <th scope="col">Place</th>
+                                <!-- <th scope="col">Logo</th> -->
+                                <th scope="col">Team</th>
+                                <th scope="col">Wins</th>
+                                <th scope="col">Looses</th>
+
+                            </thead>
+                            {% for team in  object_list %}
+                                {% if team.conference == "EASTERN" %}
+                                <script type="text/javascript">
+                                    e=e+1
+                                </script>
+                            <tbody>
+                                <tr>
+                                    <td><script type="text/javascript">
+                                        document.write(e);
+                                    </script></td>
+                                    <!-- <td><img src="{{ team.logo.url }}" width=100 heigh=100></td> -->
+                                    <td><a href="{% url 'general:detailteam' slug=team.slug %}">{{ team.name}}</a>  </td>
+                                    <td>{{ team.wins }}</td>
+                                    <td>{{ team.looses }}</td>
+                                </tr>
+                            </tbody>
+                                {% endif %}
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+
+
+        {% endblock %}
+
+    </div>
+</div>
+
+{% endblock %}

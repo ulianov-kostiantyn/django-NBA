@@ -1,0 +1,10 @@
+{% extends "general/general_base.html" %}
+{% load static %}
+
+<div class="container">
+    {% block content %}
+    {% block pregeneral %}
+    {% block general_content %}{% endblock general_content %}
+    {% endblock pregeneral %}
+    {% endblock content %}
+</div>
